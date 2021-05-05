@@ -1,29 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
-	"encoding/json"
-	"github.com/gorilla/mux"
-	"time"
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
-	router := mux.NewRouter()
+	// create echo instance
+	e := echo.New()
 
-	router.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("GET -> /api/health")
-		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	// simple health check
+	e.GET("/api/health", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Ok")
 	})
 
-	srv := &http.Server{
-		Handler: router,
-		Addr:    "127.0.0.1:8000",
-		// Good practice: enforce timeouts for servers you create!
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
-	}
+	/*e.GET("/index", Controllers.Index)
+	e.GET("/show/:id", Controllers.Show)
+	e.POST("/store", Controllers.Store)
+	e.PUT("/update/:id", Controllers.Update)
+	e.DELETE("/delete/:id", Controllers.Delete)*/
 
-	srv.ListenAndServe()
-	fmt.Println("Api closed")
+	//start server
+	e.Logger.Fatal(e.Start(":8000"))
 }
