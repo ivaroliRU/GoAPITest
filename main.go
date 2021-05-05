@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 	"github.com/labstack/echo/v4"
+
+	"github.com/ivaroliRU/peopleAPI/controllers"
 )
 
 func main() {
@@ -14,11 +16,19 @@ func main() {
 		return c.String(http.StatusOK, "Ok")
 	})
 
-	/*e.GET("/index", Controllers.Index)
-	e.GET("/show/:id", Controllers.Show)
-	e.POST("/store", Controllers.Store)
-	e.PUT("/update/:id", Controllers.Update)
-	e.DELETE("/delete/:id", Controllers.Delete)*/
+	// People routing
+	e.GET("/api/people", controllers.GetPeople)
+	e.POST("/api/people", controllers.AddPerson)
+	e.GET("/api/people/:id", controllers.GetPersonByID)
+	e.PUT("/api/people/:id", controllers.UpdatePersonByID)
+	e.DELETE("/api/people/:id", controllers.DeletePersonByID)
+
+	// Job routing
+	e.GET("/api/jobs", controllers.GetJobs)
+	e.POST("/api/jobs", controllers.AddJob)
+	e.GET("/api/jobs/:id", controllers.GetJobByID)
+	e.GET("/api/jobs/:id/people", controllers.GetPeopleWithJob)
+	e.PUT("/api/jobs/:id", controllers.UpdateJobByID)
 
 	//start server
 	e.Logger.Fatal(e.Start(":8000"))

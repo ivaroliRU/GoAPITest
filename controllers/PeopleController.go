@@ -6,26 +6,26 @@ import (
 )
 
 // GET api/people/
-func index(c echo.Context) error {
+func GetPeople(c echo.Context) error {
 	return c.String(http.StatusOK, "ok")
 }
 
 // POST api/people/
-func addPerson(c echo.Context) error {
+func AddPerson(c echo.Context) error {
 	return c.String(http.StatusOK, "ok")
 }
 
 // GET api/people/:id
-func getPersonByID(c echo.Context) error {
+func GetPersonByID(c echo.Context) error {
 	return c.String(http.StatusOK, "ok")
 }
 
 // DELETE api/people/:id
-func deletePersonByID(c echo.Context) error {
+func DeletePersonByID(c echo.Context) error {
 	return c.String(http.StatusOK, "ok")
 }
 
 // PUT api/people/:id
-func updatePersonByID(c echo.Context) error {
+func UpdatePersonByID(c echo.Context) error {
 	return c.String(http.StatusOK, "ok")
 }
