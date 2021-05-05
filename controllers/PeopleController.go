@@ -2,12 +2,14 @@ package controllers
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/ivaroliRU/peopleAPI/repositories"
 	"net/http"
 )
 
 // GET api/people/
 func GetPeople(c echo.Context) error {
-	return c.String(http.StatusOK, "ok")
+	people := repositories.GetPeople()
+	return c.JSON(http.StatusOK, people)
 }
 
 // POST api/people/
