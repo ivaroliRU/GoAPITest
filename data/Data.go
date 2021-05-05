@@ -11,11 +11,11 @@ type Data struct {
 	Jobs []models.Job
 }
 
-func GetData() Data {
-	data := Data{}
+var data Data = Data{}
 
-	jobsFile, _ := ioutil.ReadFile("repositories/data/jobs.json")
-	peopleFile, _ := ioutil.ReadFile("repositories/data/people.json")
+func GetData() Data {
+	jobsFile, _ := ioutil.ReadFile("data/jobs.json")
+	peopleFile, _ := ioutil.ReadFile("data/people.json")
 
 	_ = json.Unmarshal([]byte(peopleFile), &data.People)
 	_ = json.Unmarshal([]byte(jobsFile), &data.Jobs)
