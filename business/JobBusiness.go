@@ -10,10 +10,12 @@ type JobsBusiness struct {
 	Data *data.Data
 }
 
+// get all jobs
 func (j *JobsBusiness) GetJobs() []models.Job {
 	return j.Data.GetData().Jobs
 }
 
+// get a specific job with an id
 func (j *JobsBusiness) GetJobsByID(id int32) *models.Job {
 	jobs := j.Data.GetData().Jobs
 
@@ -28,6 +30,7 @@ func (j *JobsBusiness) GetJobsByID(id int32) *models.Job {
 	return nil
 }
 
+// get people with a specific job
 func (j *JobsBusiness) GetPeopleWithJob(id int32) []models.Person {
 	people := j.Data.GetData().People
 	returnPeople := []models.Person{}
@@ -40,3 +43,10 @@ func (j *JobsBusiness) GetPeopleWithJob(id int32) []models.Person {
 
 	return returnPeople
 }
+
+// add a job to our datasource
+func (j *JobsBusiness) AddJob(job models.Job) {
+	j.Data.Jobs = append(j.Data.Jobs, job)
+}
+
+// update a job in our datasource

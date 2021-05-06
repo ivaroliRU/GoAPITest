@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/ivaroliRU/peopleAPI/business"
 	"github.com/ivaroliRU/peopleAPI/data"
+	"github.com/ivaroliRU/peopleAPI/models"
 	"net/http"
 	"strconv"
 )
@@ -20,7 +21,15 @@ func GetJobs(c echo.Context) error {
 
 // POST api/jobs/
 func AddJob(c echo.Context) error {
-	return c.String(http.StatusOK, "ok")
+	j := new(models.Job)
+	err := c.Bind(j)
+	if err != nil {
+		return c.String(http.StatusBadRequest, "")
+	}
+
+	jobBusiness.AddJob(*j)
+
+	return c.JSON(http.StatusOK, j)
 }
 
 // GET api/jobs/:id
