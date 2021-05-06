@@ -4,6 +4,7 @@ import (
 	"github.com/ivaroliRU/peopleAPI/models"
 	"encoding/json"
 	"io/ioutil"
+	"fmt"
 )
 
 type Data struct {
@@ -11,14 +12,14 @@ type Data struct {
 	Jobs []models.Job
 }
 
-var data Data = Data{}
-
-func GetData() Data {
+func (d *Data) GetData() *Data {
 	jobsFile, _ := ioutil.ReadFile("data/jobs.json")
 	peopleFile, _ := ioutil.ReadFile("data/people.json")
 
-	_ = json.Unmarshal([]byte(peopleFile), &data.People)
-	_ = json.Unmarshal([]byte(jobsFile), &data.Jobs)
+	_ = json.Unmarshal([]byte(peopleFile), &d.People)
+	_ = json.Unmarshal([]byte(jobsFile), &d.Jobs)
 
-	return data
+	fmt.Println(d)
+	
+	return d
 }

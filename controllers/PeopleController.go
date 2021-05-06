@@ -3,13 +3,18 @@ package controllers
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/ivaroliRU/peopleAPI/business"
+	"github.com/ivaroliRU/peopleAPI/data"
 	"net/http"
 	"strconv"
 )
 
+var peopleBusiness business.PeopleBusiness = business.PeopleBusiness {
+	Data: &data.Data{},
+}
+
 // GET api/people/
 func GetPeople(c echo.Context) error {
-	people := business.GetPeople()
+	people := peopleBusiness.GetPeople()
 	return c.JSON(http.StatusOK, people)
 }
 
@@ -27,7 +32,7 @@ func GetPersonByID(c echo.Context) error {
 		return c.String(http.StatusNotFound, "")
 	}
 
-	person := business.GetPersonByID(int32(id))
+	person := peopleBusiness.GetPersonByID(int32(id))
 
 	if person == nil {
 		return c.String(http.StatusNotFound, "")

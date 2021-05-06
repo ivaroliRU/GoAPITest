@@ -5,12 +5,16 @@ import (
 	"github.com/ivaroliRU/peopleAPI/data"
 )
 
-func GetPeople() []models.Person {
-	return data.GetData().People
+type PeopleBusiness struct {
+	Data *data.Data
 }
 
-func GetPersonByID(id int32) *models.Person {
-	people := data.GetData().People
+func (p *PeopleBusiness) GetPeople() []models.Person {
+	return p.Data.GetData().People
+}
+
+func (p *PeopleBusiness) GetPersonByID(id int32) *models.Person {
+	people := p.Data.GetData().People
 
 	for _, p := range people {
 		if p.ID == id {
